@@ -43,3 +43,11 @@ a
   height: max-content;
   margin:26px auto
 }
+
+
+#toast-container
+{
+  top:50%!important;
+  left: 50px!important;
+  right:auto !important
+}
