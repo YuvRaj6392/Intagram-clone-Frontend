@@ -9,7 +9,7 @@ export default function Home() {
               <img src="https://images.unsplash.com/photo-1505832018823-50331d70d237?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHdhbGxwYXBlciUyMDRrfGVufDB8MHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60" alt="cardImage" />
             </div>
             <div className='card-content'>
-            <i class="material-icons" style={{color:'red'}}>favorite</i>
+            <i className="material-icons" style={{color:'red'}}>favorite</i>
                 <h6>Title</h6>
                 <p>This is an amazing scenic post!</p>
                 <input type="text" placeholder='add a comment' />
@@ -21,7 +21,7 @@ export default function Home() {
               <img src="https://images.unsplash.com/photo-1505832018823-50331d70d237?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHdhbGxwYXBlciUyMDRrfGVufDB8MHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60" alt="cardImage" />
             </div>
             <div className='card-content'>
-            <i class="material-icons" style={{color:'red'}}>favorite</i>
+            <i className="material-icons" style={{color:'red'}}>favorite</i>
                 <h6>Title</h6>
                 <p>This is an amazing scenic post!</p>
                 <input type="text" placeholder='add a comment' />
@@ -33,7 +33,7 @@ export default function Home() {
               <img src="https://images.unsplash.com/photo-1505832018823-50331d70d237?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHdhbGxwYXBlciUyMDRrfGVufDB8MHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60" alt="cardImage" />
             </div>
             <div className='card-content'>
-            <i class="material-icons" style={{color:'red'}}>favorite</i>
+            <i className="material-icons" style={{color:'red'}}>favorite</i>
                 <h6>Title</h6>
                 <p>This is an amazing scenic post!</p>
                 <input type="text" placeholder='add a comment' />
@@ -45,7 +45,7 @@ export default function Home() {
               <img src="https://images.unsplash.com/photo-1505832018823-50331d70d237?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHdhbGxwYXBlciUyMDRrfGVufDB8MHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60" alt="cardImage" />
             </div>
             <div className='card-content'>
-            <i class="material-icons" style={{color:'red'}}>favorite</i>
+            <i className="material-icons" style={{color:'red'}}>favorite</i>
                 <h6>Title</h6>
                 <p>This is an amazing scenic post!</p>
                 <input type="text" placeholder='add a comment' />
