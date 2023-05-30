@@ -56,7 +56,7 @@ export default function Login() {
         setPassword(e.target.value)
       }} />
         <button
-          className="btn waves-effect waves-light #64b5f6 blue lighten-2"
+          className="btn waves-effect waves-light #64b5f6 blue darken-2"
           
         >
           Login
