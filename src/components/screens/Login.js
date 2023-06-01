@@ -34,6 +34,8 @@ export default function Login() {
       setPassword("");
       M.toast({html: "Successfully SignedIn",classes:'green'})
       localStorage.setItem('token',json.message)
+      //we cannot save objects to local storage therefore we are using JSON.stringify
+      localStorage.setItem('user',JSON.stringify(json.user))
       history('/')
      }
      else

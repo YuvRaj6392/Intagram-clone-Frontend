@@ -26,10 +26,12 @@ export default function CreatePost() {
       setBody("");
       setImage("");
       setUrl("");
+      setImage("")
       M.toast({html: 'Post uploaded successfully!',classes:'green'})
      }
      else
      {
+      setUrl("");
       M.toast({html: "Failed! Make sure you are loggedIn",classes:'red'})
      }
 
@@ -52,7 +54,7 @@ export default function CreatePost() {
       data.append("file",image);
       data.append("upload_preset","");
       data.append("cloud_name","")
-      fetch('Your_cloudinary_api',{
+      fetch('Your_cloudinary_api/image/upload',{
         method:'post',
         body:data
       }
