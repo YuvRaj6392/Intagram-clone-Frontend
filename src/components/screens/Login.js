@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { Link, useNavigate } from 'react-router-dom'
-import M from 'materialize-css'
+import M from 'materialize-css';
+import { UserContext } from "../../App";
 export default function Login() {
+  const {state,dispatch}=useContext(UserContext)
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -36,6 +38,9 @@ export default function Login() {
       localStorage.setItem('token',json.message)
       //we cannot save objects to local storage therefore we are using JSON.stringify
       localStorage.setItem('user',JSON.stringify(json.user))
+      dispatch({
+        type:"USER",payload:json.user
+      })
       history('/')
      }
      else
