@@ -51,6 +51,7 @@ export default function CreatePost() {
     {
       //used cloudinary to upload the image
       const data=new FormData();
+      
       data.append("file",image);
       data.append("upload_preset","");
       data.append("cloud_name","")
