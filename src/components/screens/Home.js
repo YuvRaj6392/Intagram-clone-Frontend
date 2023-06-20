@@ -9,10 +9,69 @@ export default function Home() {
     }
   }
   ).then(res=>res.json()).then(result=>{
+    
     console.log(result.message)
     setData(result.message)
   })
   },[])
+
+
+  const likePost=(id)=>{
+    console.log(id)
+    fetch('http://localhost:8080/api/like',{
+      method:'Put',
+      headers:{
+        "Content-Type":"application/json",
+        "x-access-token":localStorage.getItem('token')
+      },
+      body:JSON.stringify({
+        postId:id
+      })
+    }).then(res=>res.json())
+    .then(result=>{
+      console.log(result)
+      const newData=data.map(item=>{
+        if(item._id===result.message._id)
+        {
+          return result.message;
+        }
+        else
+        {
+          return item;
+        }
+      })
+      setData(newData)
+    })
+  }
+
+
+  const unlikePost=(id)=>{
+    console.log(id)    
+    fetch('http://localhost:8080/api/unlike',{
+      method:'Put',
+      headers:{
+        "Content-Type":"application/json",
+        "x-access-token":localStorage.getItem('token')
+      },
+      body:JSON.stringify({
+        postId:id
+      })
+    }).then(res=>res.json())
+    .then(result=>{
+      console.log(result)
+      const newData=data.map(item=>{
+        if(item._id===result.message._id)
+        {
+          return result.message;
+        }
+        else
+        {
+          return item;
+        }
+      })
+      setData(newData)
+    })
+  }
   return (
     <div className='home'>
     {
@@ -25,6 +84,13 @@ export default function Home() {
             </div>
             <div className='card-content'>
             <i className="material-icons" style={{color:'red'}}>favorite</i>
+            <i className="material-icons" onClick={()=>{
+              likePost(item._id)
+            }}>thumb_up</i>
+            <i className="material-icons" onClick={()=>{
+              unlikePost(item._id)
+            }}>thumb_down</i>
+                <h6>{item.likes.length} liked</h6>
                 <h6>{item.title}</h6>
                 <p>{item.body}</p>
                 <input type="text" placeholder='add a comment' />
