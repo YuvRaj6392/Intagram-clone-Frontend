@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
-
+import React, { useContext, useEffect, useState } from 'react'
+import { UserContext } from '../../App';
 export default function Home() {
   const [data,setData]=useState("");
+  const {state,dispatch}=useContext(UserContext)
   useEffect(()=>{
   fetch('http://localhost:8080/api/showallposts',{
     headers:{
@@ -40,6 +41,7 @@ export default function Home() {
           return item;
         }
       })
+      console.log(newData)
       setData(newData)
     })
   }
@@ -84,12 +86,17 @@ export default function Home() {
             </div>
             <div className='card-content'>
             <i className="material-icons" style={{color:'red'}}>favorite</i>
-            <i className="material-icons" onClick={()=>{
-              likePost(item._id)
-            }}>thumb_up</i>
+            {item.likes.includes(state._id)
+            ?
             <i className="material-icons" onClick={()=>{
               unlikePost(item._id)
             }}>thumb_down</i>
+            :
+            <i className="material-icons" onClick={()=>{
+              likePost(item._id)
+            }}>thumb_up</i>
+           
+            }
                 <h6>{item.likes.length} liked</h6>
                 <h6>{item.title}</h6>
                 <p>{item.body}</p>
