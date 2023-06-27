@@ -134,7 +134,7 @@ export default function Home() {
                 {
                   item.comments.map(record=>{
                     return (
-                      <h6><span style={{fontWeight:'500'}}>{record.postedBy.name}</span>&nbsp;{record.text}</h6>
+                      <h6 key={record._id}><span style={{fontWeight:'500'}}>{record.postedBy.name}</span>&nbsp;{record.text}</h6>
                     )
                   })
                 }
