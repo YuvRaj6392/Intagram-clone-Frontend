@@ -5,7 +5,11 @@ export default function Home() {
   const {state,dispatch}=useContext(UserContext);
   const {comment,setComment}=useState("")
   useEffect(()=>{
-  fetch('http://localhost:8080/api/showallposts',{
+  showAllPost()
+  },[])
+
+  const showAllPost=()=>{
+    fetch('http://localhost:8080/api/showallposts',{
     headers:{
       'x-access-token':localStorage.getItem('token')
     }
@@ -15,9 +19,7 @@ export default function Home() {
     console.log(result.message)
     setData(result.message)
   })
-  },[])
-
-
+  }
   const likePost=(id)=>{
     console.log(id)
     fetch('http://localhost:8080/api/like',{
@@ -32,18 +34,7 @@ export default function Home() {
     }).then(res=>res.json())
     .then(result=>{
       console.log(result)
-      const newData=data.map(item=>{
-        if(item._id===result.message._id)
-        {
-          return result.message;
-        }
-        else
-        {
-          return item;
-        }
-      })
-      console.log(newData)
-      setData(newData)
+      showAllPost()
     })
   }
 
@@ -62,17 +53,7 @@ export default function Home() {
     }).then(res=>res.json())
     .then(result=>{
       console.log(result)
-      const newData=data.map(item=>{
-        if(item._id===result.message._id)
-        {
-          return result.message;
-        }
-        else
-        {
-          return item;
-        }
-      })
-      setData(newData)
+      showAllPost()
     })
   }
 
@@ -90,19 +71,21 @@ export default function Home() {
     }).then(res=>res.json())
     .then(result=>{
       console.log(result)
-      const newData=data.map(item=>{
-        if(item._id===result.message._id)
-        {
-          return result.message;
-        }
-        else
-        {
-          return item;
-        }
-      })
-      setData(newData)
-    }).catch(err=>{
-      console.log(err)
+      showAllPost()
+    })
+  }
+
+  const deletePost=(postId)=>{
+    fetch(`http://localhost:8080/api/deletePost/${postId}`,{
+      method:'delete',
+      headers:{
+        'Content-Type':'application/json',
+        'x-access-token':localStorage.getItem('token')
+      }
+    }).then(res=>res.json())
+    .then(result=>{
+      console.log(result)
+      showAllPost()
     })
   }
   return (
@@ -111,7 +94,10 @@ export default function Home() {
      data && data.map(item=>{
         return (
           <div className='card home-card' key={item._id}>
-            <h5>{item.postedBy.name}</h5>
+            <h5>{item.postedBy.name}{item.postedBy._id===state._id &&<i className="material-icons" style={{cursor:'pointer',float:'right'}}  onClick={()=>{
+              deletePost(item._id)
+            }}>delete</i>
+            }</h5>
             <div className='card-image'>
               <img src={item.photo} alt={item.postedBy.name} />
             </div>
