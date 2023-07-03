@@ -1,10 +1,25 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../App";
-
-export default function Profile() {
-  const {state,dispatch}=useContext(UserContext);
-  console.log(state)
-  
+import { useParams } from "react-router-dom";
+export default function UserProfile() {
+    const [myPics,setMyPics]=useState([]);
+    const {state,dispatch}=useContext(UserContext);
+    const {userId}=useParams();
+    useEffect(()=>{
+     fetch(`http://localhost:8080/api/showUserProfile/${userId}`,{
+      method:'get',
+      headers:{
+        'Content-Type':'application/json',
+        'x-access-token':localStorage.getItem('token')
+      }
+     }).then(res=>res.json()).then(
+      result=>{
+        setMyPics(result.posts)
+        console.log(result)
+      }  
+      )
+     
+    },[])
   return (
     <div style={{maxWidth:'80%',margin:'0px auto'}}>
       <div
@@ -23,7 +38,7 @@ export default function Profile() {
           />
         </div>
         <div>
-        <h3>{state?state.name:"Loading"}</h3>
+          <h3>{state?state.name:"Loading"}</h3>
           <div
             style={{
               display: "flex",
@@ -72,3 +87,4 @@ export default function Profile() {
     </div>
   );
 }
+

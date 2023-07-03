@@ -11,7 +11,7 @@ const renderList=()=>{
   if(state)
   {
     return [
-      <li><Link to="/profile">Profile</Link></li>,
+      <li><Link to="/profile/649d9e12ea0624d9fbc3b2e5">Profile</Link></li>,
         <li><Link to="/create">Create Post</Link></li>,
         <li><button
       className="btn waves-effect waves-light #64b5f6 red darken-2" onClick={()=>{
