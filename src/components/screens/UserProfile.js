@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../App";
 import { useParams } from "react-router-dom";
 export default function UserProfile() {
-    const [myPics,setMyPics]=useState([]);
+    const [userName,setUserName]=useState(null);
+    const [posts,setPosts]=useState([]);
     const {state,dispatch}=useContext(UserContext);
     const {userId}=useParams();
     useEffect(()=>{
@@ -14,8 +15,9 @@ export default function UserProfile() {
       }
      }).then(res=>res.json()).then(
       result=>{
-        setMyPics(result.posts)
         console.log(result)
+        setUserName(result.user.name);
+        setPosts(result.posts)
       }  
       )
      
@@ -38,7 +40,7 @@ export default function UserProfile() {
           />
         </div>
         <div>
-          <h3>{state?state.name:"Loading"}</h3>
+          <h3>{userName?userName:"Loading"}</h3>
           <div
             style={{
               display: "flex",
@@ -46,44 +48,22 @@ export default function UserProfile() {
               width: "108%",
             }}
           >
-            <h5>3003 posts</h5>
+            <h5>{posts.length?posts.length:"Loading"} posts</h5>
             <h5>576.4m followers</h5>
             <h5>457 following</h5>
           </div>
         </div>
       </div>
       <div className="gallery">
-        <img
-          className="item"
-          src="https://images.unsplash.com/photo-1634455257140-b5ab16f0770e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHVuc3BhbHNofGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60"
-          alt="galleryImage"
-        />
-        <img
-          className="item"
-          src="https://images.unsplash.com/photo-1634455257140-b5ab16f0770e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHVuc3BhbHNofGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60"
-          alt="galleryImage"
-        />
-        <img
-          className="item"
-          src="https://images.unsplash.com/photo-1634455257140-b5ab16f0770e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHVuc3BhbHNofGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60"
-          alt="galleryImage"
-        />
-        <img
-          className="item"
-          src="https://images.unsplash.com/photo-1634455257140-b5ab16f0770e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHVuc3BhbHNofGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60"
-          alt="galleryImage"
-        />
-        <img
-          className="item"
-          src="https://images.unsplash.com/photo-1634455257140-b5ab16f0770e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHVuc3BhbHNofGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60"
-          alt="galleryImage"
-        />
-         <img
-          className="item"
-          src="https://images.unsplash.com/photo-1634455257140-b5ab16f0770e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHVuc3BhbHNofGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60"
-          alt="galleryImage"
-        />
-      </div>
+  {posts.length > 0 ? (
+    posts.map(item => (
+      <img key={item._id} className="item" src={item.photo} alt={item.title} />
+    ))
+  ) : (
+    <p>No posts available.</p>
+  )}
+</div>
+
     </div>
   );
 }
