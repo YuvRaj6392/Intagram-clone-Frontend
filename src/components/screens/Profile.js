@@ -47,7 +47,7 @@ return (
             width: "108%",
           }}
         >
-          <h5>{posts.length?posts.length:"Loading"} posts</h5>
+          <h5>{posts.length?posts.length:"0"} posts</h5>
           <h5>576.4m followers</h5>
           <h5>457 following</h5>
         </div>

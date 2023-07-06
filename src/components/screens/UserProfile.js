@@ -22,6 +22,37 @@ export default function UserProfile() {
       )
      
     },[])
+
+    const followUser=()=>{
+      fetch('http://localhost:8080/api/follow',{
+        method:'put',
+        headers:{
+          "Content-Type":"application/json",
+          "x-access-token":localStorage.getItem('token')
+        },
+        body:JSON.stringify({
+          followId:userId
+        })
+      }).then(res=>res.json()).then(result=>{
+        console.log(result)
+      })
+    }
+
+
+    const unFollowUser=()=>{
+      fetch('http://localhost:8080/api/unfollow',{
+        method:'put',
+        headers:{
+          "Content-Type":"application/json",
+          "x-access-token":localStorage.getItem('token')
+        },
+        body:JSON.stringify({
+          unFollowId:userId
+        })
+      }).then(res=>res.json()).then(result=>{
+        console.log(result)
+      })
+    }
   return (
     <div style={{maxWidth:'80%',margin:'0px auto'}}>
       <div
@@ -48,10 +79,16 @@ export default function UserProfile() {
               width: "108%",
             }}
           >
-            <h5>{posts.length?posts.length:"Loading"} posts</h5>
+            <h5>{posts.length?posts.length:"0"} posts</h5>
             <h5>576.4m followers</h5>
             <h5>457 following</h5>
           </div>
+          <button className="btn waves-effect waves-light #64b5f6 blue darken-2" id="followBtn" onClick={()=>{
+            followUser()
+          }}>Follow</button>
+          <button className="btn waves-effect waves-light #64b5f6 blue darken-2 ms-2" id="UnfollowBtn" onClick={()=>{
+            unFollowUser()
+          }}>unfollow</button>
         </div>
       </div>
       <div className="gallery">
