@@ -4,6 +4,8 @@ import { UserContext } from "../../App";
 export default function Profile() {
   const [userName,setUserName]=useState(null);
   const [posts,setPosts]=useState([]);
+  const [followers,setFollowers]=useState([]);
+  const [following,setFollowing]=useState([]);
   const {state,dispatch}=useContext(UserContext);
   useEffect(()=>{
    fetch(`http://localhost:8080/api/showUserProfile/${state._id}`,{
@@ -17,6 +19,8 @@ export default function Profile() {
       console.log(result)
       setUserName(result.user.name);
       setPosts(result.posts)
+      setFollowers(result.user.followers)
+      setFollowing(result.user.following)
     }  
     )
    
@@ -48,8 +52,8 @@ return (
           }}
         >
           <h5>{posts.length?posts.length:"0"} posts</h5>
-          <h5>576.4m followers</h5>
-          <h5>457 following</h5>
+          <h5>{followers.length} followers</h5>
+          <h5>{following.length} following</h5>
         </div>
       </div>
     </div>

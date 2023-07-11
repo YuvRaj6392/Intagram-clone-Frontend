@@ -8,6 +8,14 @@ export const reducer=(state,action)=>{
     {
         return null
     }
+    if(action.type==="UPDATE")
+    {
+        return {
+            ...state,
+            followers:action.payload.followers,
+            following:action.payload.following
+        }
+    }
     return state
 }
 //action describes the intention of the work(what you need to do)

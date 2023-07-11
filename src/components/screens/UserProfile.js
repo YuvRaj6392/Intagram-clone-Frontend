@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 export default function UserProfile() {
     const [userName,setUserName]=useState(null);
     const [posts,setPosts]=useState([]);
+    const [followers,setFollowers]=useState([]);
+    const [following,setFollowing]=useState([]);
     const {state,dispatch}=useContext(UserContext);
     const {userId}=useParams();
     useEffect(()=>{
@@ -18,6 +20,8 @@ export default function UserProfile() {
         console.log(result)
         setUserName(result.user.name);
         setPosts(result.posts)
+        setFollowers(result.user.followers)
+        setFollowing(result.user.following)
       }  
       )
      
@@ -34,6 +38,10 @@ export default function UserProfile() {
           followId:userId
         })
       }).then(res=>res.json()).then(result=>{
+        dispatch({type:"UPDATE",payload:{following:result.message.followedUser.following,followers:result.message.followedUser.followers}})
+        localStorage.setItem('user',JSON.stringify(result.message.followedUser))
+        setFollowers(result.message.followedUser.followers)
+        setFollowing(result.message.followedUser.following)
         console.log(result)
       })
     }
@@ -50,6 +58,10 @@ export default function UserProfile() {
           unFollowId:userId
         })
       }).then(res=>res.json()).then(result=>{
+        dispatch({type:"UPDATE",payload:{following:result.message.followedUser.following,followers:result.message.followedUser.followers}})
+        localStorage.setItem('user',JSON.stringify(result.message.followedUser))
+        setFollowers(result.message.followedUser.followers)
+        setFollowing(result.message.followedUser.following)
         console.log(result)
       })
     }
@@ -80,8 +92,8 @@ export default function UserProfile() {
             }}
           >
             <h5>{posts.length?posts.length:"0"} posts</h5>
-            <h5>576.4m followers</h5>
-            <h5>457 following</h5>
+            <h5>{followers.length} followers</h5>
+            <h5>{following.length} following</h5>
           </div>
           <button className="btn waves-effect waves-light #64b5f6 blue darken-2" id="followBtn" onClick={()=>{
             followUser()
