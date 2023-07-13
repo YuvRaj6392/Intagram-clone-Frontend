@@ -8,6 +8,8 @@ export default function UserProfile() {
     const [following,setFollowing]=useState([]);
     const [showFollow,setShowFollow]=useState(true);
     const {state,dispatch}=useContext(UserContext);
+    const followingOtherUser=JSON.parse(localStorage.getItem('user'));
+    const followingOtherUser1=followingOtherUser.following;
     const {userId}=useParams();
     useEffect(()=>{
      fetch(`http://localhost:8080/api/showUserProfile/${userId}`,{
@@ -98,13 +100,13 @@ export default function UserProfile() {
             <h5>{followers.length} followers</h5>
             <h5>{following.length} following</h5>
           </div>
-          {showFollow?
-            <button className="btn waves-effect waves-light #64b5f6 blue darken-2" style={{margin:"10px"}} id="followBtn" onClick={()=>{
-            followUser()
-          }}>Follow</button>:
-          <button className="btn waves-effect waves-light #64b5f6 blue darken-2 ms-2" style={{margin:"10px"}} id="UnfollowBtn" onClick={()=>{
+          {followingOtherUser1.includes(userId)?
+            <button className="btn waves-effect waves-light #64b5f6 blue darken-2 ms-2" style={{margin:"10px"}} id="UnfollowBtn" onClick={()=>{
             unFollowUser()
           }}>unfollow</button>
+           : <button className="btn waves-effect waves-light #64b5f6 blue darken-2" style={{margin:"10px"}} id="followBtn" onClick={()=>{
+            followUser()
+          }}>Follow</button> 
           }
         </div>
       </div>
